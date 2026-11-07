@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Little Heroes PH: Vitamins for Little Champions</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --purple:#7B5EA7;--purple-mid:#9B7FC7;--purple-light:#EDE0FF;--purple-dark:#5B3F87;--purple-deep:#3A2660;
+  --yellow:#FFD93D;--yellow-dark:#E6B800;--green:#4CAF7D;--green-light:#E0F7EC;--green-dark:#2E8A57;
+  --orange:#FF6B35;--orange-light:#FFF0E6;--blue:#38A3D4;--blue-light:#E0F4FF;--pink:#F178B6;
+  --cream:#FFFBF0;--white:#FFFFFF;--dark:#1E1B2E;--text:#3D3A50;--muted:#7C7A8E;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Raleway',sans-serif;color:var(--text);background:var(--cream);overflow-x:hidden}
+h1,h2,h3,.display{font-family:'Fredoka One',cursive}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,251,240,.95);backdrop-filter:blur(14px);border-bottom:3px solid var(--yellow);padding:0 6%;height:140px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{width:42px;height:42px;border-radius:50%;background:var(--yellow);border:3px solid var(--orange);display:flex;align-items:center;justify-content:center;font-size:20px}
+.logo-name{font-family:'Fredoka One',cursive;font-size:24px;line-height:1;color:var(--purple)}
+.logo-name span{color:var(--orange)}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:14px;font-weight:700;color:var(--text);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--purple)}
+.nav-cta{background:var(--purple);color:white;padding:10px 22px;border-radius:50px;font-weight:800;font-size:14px;text-decoration:none;transition:transform .2s,background .2s}
+.nav-cta:hover{background:var(--purple-dark);transform:scale(1.04)}
+.nav-toggle{display:none;background:transparent;border:none;cursor:pointer;padding:0;flex-direction:column;gap:6px;width:36px;align-items:flex-start;z-index:210}
+.nav-toggle span{display:block;width:30px;height:3px;background:var(--purple);border-radius:2px;transition:transform .3s,opacity .3s}
+.nav-toggle.open span:nth-child(1){transform:translateY(9px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
+.nav-drawer{position:fixed;top:0;left:0;bottom:0;width:78%;max-width:320px;background:var(--cream);z-index:300;padding:72px 28px 28px;transform:translateX(-100%);transition:transform .3s ease;box-shadow:8px 0 30px rgba(0,0,0,.18);overflow-y:auto}
+.nav-drawer.open{transform:translateX(0)}
+.nav-drawer ul{list-style:none;display:flex;flex-direction:column;gap:22px;padding:0;margin:0}
+.nav-drawer ul li a{font-size:18px;font-weight:800;color:var(--text);text-decoration:none;transition:color .2s}
+.nav-drawer ul li a:hover{color:var(--purple)}
+.nav-drawer .drawer-cta{display:inline-block;background:var(--purple);color:#fff!important;padding:14px 28px;border-radius:50px;font-weight:800;margin-top:8px;text-align:center}
+.nav-drawer-close{position:absolute;top:14px;right:18px;background:transparent;border:none;font-size:34px;cursor:pointer;color:var(--text);line-height:1;width:36px;height:36px;display:flex;align-items:center;justify-content:center;padding:0}
+.nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:250;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.nav-overlay.open{opacity:1;visibility:visible}
+body.drawer-open{overflow:hidden}
+#home{min-height:100vh;padding:170px 6% 60px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;background:linear-gradient(150deg,#FFF9E6 0%,#F5F0FF 55%,#E0FFF4 100%);position:relative;overflow:hidden}
+.bg-blobs{position:absolute;inset:0;pointer-events:none}
+.blob{position:absolute;border-radius:50%;opacity:.13;animation:floaty 7s ease-in-out infinite}
+.blob:nth-child(1){width:200px;height:200px;background:var(--yellow);top:8%;left:3%;animation-delay:0s}
+.blob:nth-child(2){width:100px;height:100px;background:var(--pink);top:65%;left:10%;animation-delay:1.2s}
+.blob:nth-child(3){width:160px;height:160px;background:var(--purple);top:12%;right:6%;animation-delay:2s}
+.blob:nth-child(4){width:75px;height:75px;background:var(--green);bottom:22%;right:16%;animation-delay:.6s}
+.blob:nth-child(5){width:120px;height:120px;background:var(--blue);bottom:10%;left:40%;animation-delay:1.8s}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+.hero-text{position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--yellow);color:var(--dark);font-weight:800;font-size:13px;padding:6px 16px;border-radius:50px;border:2px solid var(--yellow-dark);margin-bottom:22px}
+.hero-text h1{font-size:clamp(44px,5.5vw,74px);line-height:1.05;color:var(--dark);margin-bottom:18px}
+.c-purple{color:var(--purple)}.c-orange{color:var(--orange)}
+.hero-text p{font-size:17px;line-height:1.8;color:var(--muted);max-width:480px;margin-bottom:36px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px}
+.btn-primary{background:var(--purple);color:white;padding:15px 36px;border-radius:50px;font-weight:800;font-size:15px;text-decoration:none;border:3px solid var(--purple-dark);transition:transform .25s,box-shadow .25s;display:inline-block}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(123,94,167,.35)}
+.btn-outline{background:transparent;color:var(--purple);padding:15px 36px;border-radius:50px;font-weight:800;font-size:15px;text-decoration:none;border:3px solid var(--purple);transition:transform .25s,background .25s,color .25s;display:inline-block}
+.btn-outline:hover{background:var(--purple);color:white;transform:translateY(-3px)}
+.hero-stats{display:flex;gap:18px;flex-wrap:wrap}
+.hstat{background:white;border-radius:18px;padding:14px 20px;border:2px solid rgba(0,0,0,.06);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-width:120px}
+.hstat-num img{margin:0 auto}
+.hstat-num{font-family:'Fredoka One',cursive;font-size:28px;color:var(--purple);line-height:1}
+.hstat-label{font-size:11px;color:var(--muted);font-weight:700;margin-top:2px}
+.hero-visual{position:relative;z-index:2;display:flex;align-items:center;justify-content:center}
+.chars-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:420px;width:100%}
+.char-card{background:white;border-radius:26px;padding:24px 18px;text-align:center;border:3px solid transparent;transition:transform .25s,box-shadow .25s;position:relative}
+.char-card:hover{transform:translateY(-6px);box-shadow:0 14px 36px rgba(0,0,0,.1)}
+.char-card.cc-purple{border-color:var(--purple);background:#2A2550}
+.char-card.cc-yellow{border-color:var(--yellow);background:#2A2550}
+.char-card.cc-green{border-color:var(--green);background:#2A2550}
+.char-card.cc-blue{border-color:var(--blue);background:#2A2550}
+.cs-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:800;padding:3px 12px;border-radius:50px;white-space:nowrap}
+.csb-live{background:var(--purple);color:white}
+.csb-soon{background:#E8E5F0;color:var(--muted)}
+.char-emoji{font-size:50px;margin-bottom:8px;display:block}
+.char-name{font-family:'Fredoka One',cursive;font-size:16px;line-height:1.15;margin-bottom:3px}
+.cn-purple{color:var(--purple)}.cn-yellow{color:var(--yellow-dark)}.cn-green{color:var(--green-dark)}.cn-blue{color:var(--blue)}
+.char-role{font-size:10px;color:rgba(255,255,255,0.6);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.char-power{display:inline-block;font-size:10px;font-weight:800;padding:3px 10px;border-radius:50px}
+.cp-purple{background:var(--purple-light);color:var(--purple-dark)}
+.cp-yellow{background:#FFF9CC;color:var(--yellow-dark)}
+.cp-green{background:var(--green-light);color:var(--green-dark)}
+.cp-blue{background:var(--blue-light);color:#1475A0}
+section{padding:88px 6%}
+.section-label{display:inline-block;background:var(--yellow);color:var(--dark);font-weight:800;font-size:11px;letter-spacing:.09em;text-transform:uppercase;padding:5px 14px;border-radius:50px;border:2px solid var(--yellow-dark);margin-bottom:12px}
+.section-title{font-size:clamp(30px,3.8vw,52px);color:var(--dark);line-height:1.1;margin-bottom:10px}
+.section-sub{font-size:16px;color:var(--muted);max-width:540px;line-height:1.75;margin-bottom:50px}
+#about{background:white}
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.about-visual{position:relative;display:flex;align-items:center;justify-content:center}
+.about-circle{width:300px;height:300px;border-radius:50%;background:linear-gradient(135deg,var(--purple-light),#FFF0FF);border:4px solid var(--purple);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px}
+.about-circle .big-e{font-size:72px}
+.about-circle .ct{font-family:'Fredoka One',cursive;font-size:20px;color:var(--purple);margin-top:10px;line-height:1.3}
+.aorb{position:absolute;width:86px;height:86px;border-radius:50%;background:white;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:24px;border:3px solid;animation:floaty 5s ease-in-out infinite;box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.aorb .al{font-size:9px;font-weight:800;margin-top:2px;text-align:center;line-height:1.2}
+.o1{top:-5px;right:35px;border-color:var(--yellow);animation-delay:0s}
+.o2{bottom:15px;right:5px;border-color:var(--green);animation-delay:1s}
+.o3{bottom:15px;left:5px;border-color:var(--orange);animation-delay:.5s}
+.o4{top:-5px;left:35px;border-color:var(--blue);animation-delay:1.5s}
+.pillars{display:flex;flex-direction:column;gap:18px}
+.pillar{display:flex;gap:16px;align-items:flex-start;background:var(--cream);border-radius:20px;padding:18px 20px;border:2px solid rgba(0,0,0,.05);transition:transform .2s}
+.pillar:hover{transform:translateX(6px)}
+.pi{width:50px;height:50px;border-radius:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:24px}
+.pi-purple{background:var(--purple-light)}.pi-green{background:var(--green-light)}.pi-yellow{background:#FFF9CC}.pi-orange{background:var(--orange-light)}
+.pillar h3{font-size:15px;color:var(--dark);margin-bottom:3px}
+.pillar p{font-size:13px;color:var(--muted);line-height:1.6}
+.mission-strip{background:var(--purple);color:white;border-radius:22px;padding:26px 28px;margin-top:24px;display:flex;gap:16px;align-items:center}
+.mission-strip .mi{font-size:36px;flex-shrink:0}
+.mission-strip h3{font-family:'Fredoka One',cursive;font-size:18px;margin-bottom:4px}
+.mission-strip p{font-size:14px;color:rgba(255,255,255,.8);line-height:1.6}
+#wisey{background:var(--purple-deep);padding:100px 6%;position:relative;overflow:hidden}
+.wisey-bg-orbs{position:absolute;inset:0;pointer-events:none}
+.worb{position:absolute;border-radius:50%;background:rgba(255,255,255,.05);animation:floaty 8s ease-in-out infinite}
+.worb:nth-child(1){width:320px;height:320px;top:-80px;right:-60px;animation-delay:0s}
+.worb:nth-child(2){width:200px;height:200px;bottom:-60px;left:-40px;animation-delay:2s}
+.worb:nth-child(3){width:140px;height:140px;top:40%;left:48%;animation-delay:1s}
+.wisey-wrap{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:center}
+.wisey-live-badge{display:inline-flex;align-items:center;gap:8px;background:var(--yellow);color:var(--dark);font-weight:800;font-size:12px;padding:6px 16px;border-radius:50px;border:2px solid var(--yellow-dark);margin-bottom:20px}
+.wisey-live-dot{width:8px;height:8px;border-radius:50%;background:var(--orange);animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.wisey-left h2{font-size:clamp(40px,5vw,68px);color:white;line-height:1.05;margin-bottom:8px}
+.wisey-left h2 em{color:var(--yellow);font-style:normal}
+.wisey-tagline{font-size:18px;color:rgba(255,255,255,.7);line-height:1.7;margin-bottom:30px;max-width:480px}
+.wisey-quote{background:rgba(255,255,255,.07);border-left:4px solid var(--yellow);border-radius:0 16px 16px 0;padding:16px 20px;margin-bottom:32px;max-width:460px}
+.wisey-quote p{font-size:15px;color:rgba(255,255,255,.85);line-height:1.7;font-style:italic}
+.wisey-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:32px}
+.btn-wisey{background:var(--yellow);color:var(--dark);padding:15px 36px;border-radius:50px;font-weight:800;font-size:15px;text-decoration:none;border:3px solid var(--yellow-dark);transition:transform .25s,box-shadow .25s;display:inline-block}
+.btn-wisey:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(255,217,61,.4)}
+.btn-wisey-o{background:transparent;color:white;padding:15px 36px;border-radius:50px;font-weight:800;font-size:15px;text-decoration:none;border:3px solid rgba(255,255,255,.4);transition:transform .25s,border-color .25s;display:inline-block}
+.btn-wisey-o:hover{border-color:white;transform:translateY(-3px)}
+.wisey-ingr-row{display:flex;flex-wrap:wrap;gap:12px}
+.wisey-ingr-pill{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:50px;padding:8px 18px;font-size:13px;font-weight:700;color:white}
+.wisey-ingr-pill strong{color:var(--yellow)}
+.wisey-card{background:white;border-radius:36px;padding:40px 32px;text-align:center;position:relative;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.35)}
+.wisey-card::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:var(--purple-light);opacity:.6}
+.wisey-lion-icon{width:180px;height:180px;border-radius:50%;margin:0 auto 20px;background:#2A2550;border:5px solid var(--purple);font-size:70px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;animation:floaty 4s ease-in-out infinite}
+.wisey-card h3{font-family:'Fredoka One',cursive;font-size:32px;color:var(--purple);margin-bottom:4px}
+.wc-sub{font-size:13px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:18px}
+.ingredients-list{display:flex;flex-direction:column;gap:10px;margin-bottom:22px;text-align:left}
+.ingr-item{display:flex;align-items:center;gap:12px;background:var(--cream);border-radius:14px;padding:12px 16px;border:1.5px solid rgba(0,0,0,.05)}
+.ingr-icon{font-size:22px;flex-shrink:0}
+.ingr-info strong{display:block;font-size:14px;color:var(--dark)}
+.ingr-info span{font-size:12px;color:var(--purple);font-weight:700}
+.wisey-flavor{display:inline-flex;align-items:center;gap:8px;background:var(--purple-light);border-radius:50px;padding:8px 18px;font-size:13px;font-weight:800;color:var(--purple-dark);margin-bottom:10px}
+.wisey-fda{display:inline-flex;align-items:center;gap:10px;background:white;border:2px solid var(--green);border-radius:50px;padding:6px 18px 6px 10px;font-size:11px;font-weight:800;color:var(--green-dark);letter-spacing:.08em;text-transform:uppercase}
+.wisey-fda img{height:26px;width:auto;display:block}
+.wisey-claims{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px;margin-bottom:22px}
+.wisey-claims>.wisey-flavor,.wisey-claims>.wisey-fda{margin-bottom:0}
+.wisey-disclaimer{font-size:10px;color:var(--muted);margin-top:14px;font-style:italic}
+#products{background:linear-gradient(180deg,#F5F0FF 0%,var(--cream) 100%)}
+.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.product-card{background:white;border-radius:26px;padding:26px 18px;text-align:center;border:3px solid transparent;transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.1)}
+.product-card.is-live{border-color:var(--purple)}
+.product-card.is-soon{opacity:.75}
+.product-card.is-soon:hover{transform:translateY(-3px)}
+.pc-status{position:absolute;top:14px;right:14px;font-size:10px;font-weight:800;padding:3px 10px;border-radius:50px}
+.pcs-live{background:var(--purple);color:white}
+.pcs-soon{background:#E8E5F0;color:var(--muted)}
+.prod-bubble{width:130px;height:130px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:46px;border:4px solid}
+.pb-purple{background:#2A2550;border-color:var(--purple)}
+.pb-yellow{background:#2A2550;border-color:var(--yellow)}
+.pb-green{background:#2A2550;border-color:var(--green)}
+.pb-blue{background:#2A2550;border-color:var(--blue)}
+.product-card h3{font-size:20px;color:var(--dark);margin-bottom:3px}
+.prod-role{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.pr-purple{color:var(--purple)}.pr-yellow{color:var(--yellow-dark)}.pr-green{color:var(--green-dark)}.pr-blue{color:var(--blue)}
+.product-card p{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:14px}
+.prod-tags{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-bottom:16px}
+.ptag{font-size:11px;font-weight:700;padding:3px 9px;border-radius:50px;background:var(--cream);border:1.5px solid rgba(0,0,0,.07);color:var(--text)}
+.btn-shop{display:inline-block;padding:10px 22px;border-radius:50px;font-weight:800;font-size:13px;text-decoration:none;transition:transform .2s,opacity .2s;border:2px solid transparent}
+.btn-shop:hover{transform:scale(1.05);opacity:.88}
+.bs-purple{background:var(--purple);color:white}
+.bs-gray{background:#E8E5F0;color:var(--muted);cursor:default}
+.bs-gray:hover{transform:none;opacity:1}
+#tiktok-feed{background:linear-gradient(160deg,#FFF8E0 0%,#FFF 60%);position:relative}
+.tiktok-scroller{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 6% 28px;margin:0 -6%;-webkit-overflow-scrolling:touch;scroll-padding-left:6%}
+.tiktok-card{flex:0 0 340px;scroll-snap-align:start;display:block;text-decoration:none;color:inherit;position:relative;transition:transform .25s;cursor:pointer}
+.tiktok-card:hover{transform:translateY(-6px)}
+.tiktok-card .tiktok-embed{margin:0!important;min-width:325px!important;max-width:340px!important;border-radius:16px!important;overflow:hidden}
+.tiktok-card iframe{pointer-events:none;border-radius:16px!important;display:block;max-width:100%}
+.tiktok-card::after{content:"Watch on TikTok →";position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.8);color:#fff;padding:8px 16px;border-radius:50px;font-size:12px;font-weight:800;opacity:0;transition:opacity .25s;pointer-events:none;letter-spacing:.02em;white-space:nowrap;z-index:2}
+.tiktok-card:hover::after{opacity:1}
+.tiktok-scroller::-webkit-scrollbar{height:8px}
+.tiktok-scroller::-webkit-scrollbar-track{background:rgba(0,0,0,.05);border-radius:4px;margin:0 6%}
+.tiktok-scroller::-webkit-scrollbar-thumb{background:var(--purple);border-radius:4px}
+.tiktok-scroller::-webkit-scrollbar-thumb:hover{background:var(--purple-dark)}
+#gallery{background:white}
+.gallery-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:20px}
+.socials-row{display:flex;gap:12px}
+.slink{display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:50px;font-size:13px;font-weight:800;text-decoration:none;border:2px solid;transition:transform .2s}
+.slink:hover{transform:scale(1.05)}
+.sl-ig{background:linear-gradient(135deg,#F58529,#DD2A7B,#8134AF,#515BD4);color:white;border-color:transparent}
+.sl-tt{background:#000;color:white;border-color:#000}
+.gallery-mosaic{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:240px 240px;gap:14px}
+.gm-item{border-radius:24px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;font-size:64px;cursor:pointer;transition:transform .25s}
+.gm-item:hover{transform:scale(1.03)}
+.gm-item:hover .gm-ov{opacity:1}
+.gm-item.tall{grid-row:span 2}
+.gm-ov{position:absolute;inset:0;border-radius:24px;background:rgba(91,63,135,.78);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s}
+.gm-ov p{color:white;font-weight:800;font-size:15px;text-align:center;padding:20px}
+.gm1{background:linear-gradient(135deg,var(--purple-light),#D8C0FF)}
+.gm2{background:linear-gradient(135deg,#FFF9CC,#FFE566)}
+.gm3{background:linear-gradient(135deg,var(--green-light),#B0EDD0)}
+.gm4{background:linear-gradient(135deg,var(--orange-light),#FFD0B0)}
+.gm5{background:linear-gradient(135deg,var(--blue-light),#B0D8FF)}
+#testimonials{background:linear-gradient(160deg,#FFF9E6 0%,#F5F0FF 100%)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.testi-card{background:white;border-radius:24px;padding:26px 22px;border:2px solid rgba(0,0,0,.06);position:relative;transition:transform .2s}
+.testi-card:hover{transform:translateY(-4px)}
+.testi-card::before{content:'\201C';position:absolute;top:14px;right:18px;font-size:56px;font-family:'Fredoka One',cursive;color:var(--purple-light);line-height:1}
+.testi-stars{display:flex;gap:3px;margin-bottom:12px;font-size:16px}
+.testi-card>p{font-size:14px;color:var(--text);line-height:1.75;margin-bottom:16px;font-style:italic}
+.testi-author{display:flex;align-items:center;gap:10px}
+.tav{width:40px;height:40px;border-radius:50%;font-size:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tav-purple{background:var(--purple-light)}.tav-yellow{background:#FFF9CC}.tav-green{background:var(--green-light)}
+.tai strong{display:block;font-size:14px;color:var(--dark)}
+.tai span{font-size:12px;color:var(--muted)}
+.testi-featured{grid-column:span 3;background:var(--purple);border-radius:24px;padding:32px 36px;display:flex;align-items:center;gap:32px;flex-wrap:wrap;border:none}
+.testi-featured::before{color:rgba(255,255,255,.15)}
+.testi-featured>p{color:rgba(255,255,255,.9);font-size:16px}
+.testi-featured .tai strong{color:white;font-size:15px}
+.testi-featured .tai span{color:rgba(255,255,255,.6)}
+footer{background:var(--dark);color:white;padding:60px 6% 30px}
+.footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:24px}
+.footer-brand .logo-name{color:white}
+.footer-brand .logo-name span{color:var(--yellow)}
+.footer-brand p{font-size:14px;color:rgba(255,255,255,.55);line-height:1.7;margin:12px 0 18px}
+.footer-logo{display:inline-flex;align-items:center;justify-content:center;background:white;border-radius:24px;padding:18px 26px;margin-bottom:6px}
+.footer-logo img{height:110px;width:auto;display:block}
+.footer-socials{display:flex;gap:10px}
+.fsoc{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:16px;text-decoration:none;transition:background .2s}
+.fsoc:hover{background:var(--purple)}
+.footer-col h4{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--yellow);margin-bottom:14px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.footer-col ul a{font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s}
+.footer-col ul a:hover{color:white}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.35);flex-wrap:wrap;gap:10px}
+.fchars{display:flex;gap:6px}
+.fchar{width:30px;height:30px;border-radius:50%;font-size:15px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.07)}
+.wisey-lion-icon.wli-bottle{width:320px;height:320px;background:#FFF9CC;border:none}
+@media(max-width:1024px){
+  .products-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto;gap:16px}
+  .product-card{padding:28px 22px;max-width:100%}
+  .prod-bubble{width:200px;height:200px;border-width:5px}
+  .prod-bubble img{width:160px!important;height:160px!important}
+  .wisey-wrap{grid-template-columns:1fr;gap:40px}
+  .wisey-card{max-width:460px;margin:0 auto}
+}
+@media(max-width:1024px){
+  .nav-links,.nav-cta{display:none}
+  .nav-toggle{display:flex}
+  nav{display:grid;grid-template-columns:1fr auto 1fr;justify-content:initial;padding:7px 6%;height:auto}
+  nav>.nav-toggle{justify-self:start;align-self:center}
+  nav>.logo{justify-self:center;grid-column:2}
+}
+@media(max-width:768px){
+  nav{padding:7px 6%}
+  .logo img{height:112px!important}
+  #home{grid-template-columns:1fr;padding:148px 6% 50px;text-align:center}
+  .hero-btns{justify-content:center}
+  .hero-stats{justify-content:center}
+  .hero-visual{margin-top:20px}
+  .chars-grid{max-width:380px;margin:0 auto}
+  .chars-grid .char-card img{width:140px!important;height:140px!important}
+  .about-wrap{grid-template-columns:1fr}
+  .about-visual{display:none}
+  .wisey-wrap{grid-template-columns:1fr}
+  .wisey-btns{justify-content:center}
+  .wisey-ingr-row{justify-content:center}
+  .wisey-ingr-pill{font-size:12px;padding:6px 12px}
+  .wisey-claims{flex-direction:column;gap:8px}
+  .wisey-card{padding:32px 22px;max-width:100%}
+  .wisey-lion-icon.wli-bottle{width:240px;height:240px}
+  .products-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto;gap:16px}
+  .product-card{padding:28px 22px;max-width:100%}
+  .prod-bubble{width:200px;height:200px;border-width:5px}
+  .prod-bubble img{width:160px!important;height:160px!important}
+  .testi-grid{grid-template-columns:1fr}
+  .testi-featured{grid-column:span 1}
+  .gallery-mosaic{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .gm-item.tall{grid-row:span 1}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .gallery-header{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:480px){
+  nav{padding:6px 5%}
+  .logo img{height:96px!important}
+  #home{padding:124px 6% 40px}
+  .hero-text h1{font-size:38px}
+  .chars-grid{max-width:340px}
+  .chars-grid .char-card img{width:130px!important;height:130px!important}
+  .wisey-card{padding:28px 18px}
+  .wisey-lion-icon.wli-bottle{width:200px;height:200px}
+  .products-grid{max-width:340px}
+  .product-card{padding:24px 18px}
+  .prod-bubble{width:180px;height:180px}
+  .prod-bubble img{width:144px!important;height:144px!important}
+  .footer-top{grid-template-columns:1fr}
+  .tiktok-card{flex:0 0 300px}
+  .tiktok-card .tiktok-embed{min-width:280px!important;max-width:300px!important}
+  section{padding:64px 6%}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="#home" class="logo">
+    <img src="Little%20Heroes%20logo%20%28transparent%29.png" alt="Little Heroes" style="height:120px;width:auto;display:block">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#wisey">Wisey Lion</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#gallery">Follow Us</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+  </ul>
+  <a href="#wisey" class="nav-cta">Buy Now ⚡</a>
+</nav>
+
+<aside class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <button class="nav-drawer-close" id="navClose" aria-label="Close menu">&times;</button>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#wisey">Wisey Lion</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#gallery">Follow Us</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#wisey" class="drawer-cta">Buy Now ⚡</a></li>
+  </ul>
+</aside>
+<div class="nav-overlay" id="navOverlay"></div>
+
+<section id="home">
+  <div class="bg-blobs">
+    <div class="blob"></div><div class="blob"></div><div class="blob"></div><div class="blob"></div><div class="blob"></div>
+  </div>
+  <div class="hero-text">
+    <div class="hero-badge">⚡ Made for Little Champions in the Philippines 🇵🇭</div>
+    <h1>Vitamins for<br><span class="c-purple">Little</span> <span class="c-orange">Heroes!</span></h1>
+    <p>Fuel your child's growth, boost their immunity, and supercharge their brain, with vitamins as fun and vibrant as they are!</p>
+    <div class="hero-btns">
+      <a href="#wisey" class="btn-primary">Meet Wisey Lion 🦁</a>
+      <a href="#about" class="btn-outline">Our Story</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-num"><img src="Characters/Bottle%20packaging.png" alt="Wisey Lion bottle" style="height:48px;width:auto;object-fit:contain;display:block"></div><div class="hstat-label">Now Available!</div></div>
+      <div class="hstat"><div class="hstat-num">100%</div><div class="hstat-label">Kid-Approved</div></div>
+      <div class="hstat"><div class="hstat-num">PH</div><div class="hstat-label">Proudly Pinoy</div></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="chars-grid">
+      <div class="char-card cc-purple" style="padding-top:28px;position:relative">
+        <span class="cs-badge csb-live" style="top:-12px;left:50%;transform:translateX(-50%)">⚡ Available!</span>
+        <img src="Characters/Wisey%20Lion%20%28transparent%29.png" alt="" style="width:130px;height:130px;object-fit:contain;display:block;margin:0 auto">
+        <div class="char-name cn-purple" style="margin-top:10px">Wisey Lion</div>
+        <div class="char-role">Brain &amp; Focus</div>
+        <span class="char-power cp-purple">Bubblegum Syrup</span>
+      </div>
+      <div class="char-card cc-yellow" style="padding-top:28px;position:relative">
+        <span class="cs-badge csb-soon">Coming Soon</span>
+        <img src="Characters/Munchy%20Bear%20%28transparent%29.png" alt="" style="width:130px;height:130px;object-fit:contain;display:block;margin:0 auto">
+        <div class="char-name cn-yellow" style="margin-top:10px">Munchy Bear</div>
+        <div class="char-role">Appetite</div>
+        <span class="char-power cp-yellow">Coming Soon</span>
+      </div>
+      <div class="char-card cc-green" style="padding-top:28px;position:relative">
+        <span class="cs-badge csb-soon">Coming Soon</span>
+        <img src="Characters/Giraffe%20%28transparent%29.png" alt="" style="width:130px;height:130px;object-fit:contain;display:block;margin:0 auto">
+        <div class="char-name cn-green" style="margin-top:10px">Giant Giraffe</div>
+        <div class="char-role">Growth</div>
+        <span class="char-power cp-green">Coming Soon</span>
+      </div>
+      <div class="char-card cc-blue" style="padding-top:28px;position:relative">
+        <span class="cs-badge csb-soon">Coming Soon</span>
+        <img src="Characters/Elephant%20%28transparent%29.png" alt="" style="width:130px;height:130px;object-fit:contain;display:block;margin:0 auto">
+        <div class="char-name cn-blue" style="margin-top:10px">Mighty Elephant</div>
+        <div class="char-role">Immunity</div>
+        <span class="char-power cp-blue">Coming Soon</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-wrap">
+    <div class="about-visual">
+      <div class="about-circle">
+        <img src="hero-squad.png" alt="The Little Heroes squad" style="width:230px;height:auto;margin-bottom:6px;display:block">
+        <div class="ct">Big Hearts.<br>Big Dreams.<br>Little Heroes.</div>
+      </div>
+      <div class="aorb o1">🌟<div class="al" style="color:var(--yellow-dark)">Fun</div></div>
+      <div class="aorb o2">💪<div class="al" style="color:var(--green-dark)">Strong</div></div>
+      <div class="aorb o3">🧡<div class="al" style="color:var(--orange)">Care</div></div>
+      <div class="aorb o4">🧠<div class="al" style="color:var(--blue)">Smart</div></div>
+    </div>
+    <div>
+      <div class="section-label">About Us</div>
+      <h2 class="section-title">Every Kid is a <span class="c-purple">Hero</span> in the Making</h2>
+      <p class="section-sub">Little Heroes PH was born from a simple belief: that healthy kids grow up to be big heroes. We create vitamins that kids actually <em>want</em> to take, because when health is fun, little ones thrive.</p>
+      <div class="pillars">
+        <div class="pillar"><div class="pi pi-purple">🎨</div><div><h3>Creativity &amp; Fun</h3><p>Our cartoon characters and playful design make vitamins exciting, not a chore.</p></div></div>
+        <div class="pillar"><div class="pi pi-green">🌱</div><div><h3>Health &amp; Growth</h3><p>Formulated to support appetite, immunity, height, and brain development.</p></div></div>
+        <div class="pillar"><div class="pi pi-yellow">⭐</div><div><h3>Joy &amp; Happiness</h3><p>Bright colors, lovable characters, and motivational messages every day.</p></div></div>
+        <div class="pillar"><div class="pi pi-orange">🔥</div><div><h3>Energy &amp; Vitality</h3><p>Like our lightning bolt, every child carries incredible energy to unleash.</p></div></div>
+      </div>
+      <div class="mission-strip">
+        <div class="mi">⚡</div>
+        <div><h3>Our Mission</h3><p>To empower every Filipino child to grow strong, smart, and healthy. One vitamin at a time.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="wisey">
+  <div class="wisey-bg-orbs"><div class="worb"></div><div class="worb"></div><div class="worb"></div></div>
+  <div class="wisey-wrap">
+    <div class="wisey-left">
+      <div class="wisey-live-badge"><div class="wisey-live-dot"></div>Available Now. Buy Now!</div>
+      <h2>The <em>Wisey</em><br>Choice.</h2>
+      <p class="wisey-tagline">Fueling curiosity, one bubblegum-flavored drop at a time. Give your little genius the brain boost they deserve.</p>
+      <div class="wisey-quote">
+        <p>"Final exams are coming soon. Let's give them the mental support they need to finish the school year strong."</p>
+      </div>
+      <div class="wisey-btns">
+        <a href="https://www.tiktok.com/shop/littleheroes_ph" target="_blank" rel="noopener noreferrer" class="btn-wisey">Buy Now 🛒</a>
+        <a href="https://www.tiktok.com/@littleheroes_ph" target="_blank" class="btn-wisey-o">See us on TikTok 🎵</a>
+      </div>
+      <div class="wisey-ingr-row">
+        <div class="wisey-ingr-pill">🌿 <strong>Bacopa Monnieri</strong>: Memory Herb</div>
+        <div class="wisey-ingr-pill">🧠 <strong>DHA</strong>: Brain Fuel</div>
+        <div class="wisey-ingr-pill">🍃 <strong>Gotu Kola</strong>: Focus Booster</div>
+      </div>
+    </div>
+    <div class="wisey-card">
+      <div class="wisey-lion-icon wli-bottle"><img src="Characters/Bottle%20packaging.png" alt="Wisey Lion bottle, Brain &amp; Focus Vitamin Syrup" style="height:100%;width:100%;object-fit:contain"></div>
+      <h3>Wisey Lion</h3>
+      <p class="wc-sub">Brain &amp; Focus Vitamin Syrup</p>
+      <div class="wisey-claims">
+        <div class="wisey-fda"><img src="FDA%20logo.webp" alt="FDA Philippines"> Registered</div>
+        <div class="wisey-flavor">🍬 Bubblegum Flavor · Kids-Approved!</div>
+      </div>
+      <div class="ingredients-list">
+        <div class="ingr-item"><span class="ingr-icon">🌿</span><div class="ingr-info"><strong>Bacopa Monnieri</strong><span>The Memory Herb. Supports recall &amp; retention</span></div></div>
+        <div class="ingr-item"><span class="ingr-icon">🧠</span><div class="ingr-info"><strong>DHA</strong><span>The Brain Fuel. High-speed fiber for their mind</span></div></div>
+        <div class="ingr-item"><span class="ingr-icon">🍃</span><div class="ingr-info"><strong>Gotu Kola</strong><span>The Focus Booster. Clears brain fog &amp; sharpens attention</span></div></div>
+      </div>
+      <a href="https://www.tiktok.com/shop/littleheroes_ph" target="_blank" rel="noopener noreferrer" class="btn-primary" style="display:block;margin-bottom:10px">Buy Now ⚡</a>
+      <p class="wisey-disclaimer">No Approved Therapeutic Claims. For children. Consult your pediatrician.</p>
+    </div>
+  </div>
+</section>
+
+<section id="products">
+  <div class="section-label">Our Products</div>
+  <h2 class="section-title">Meet the <span class="c-purple">Hero Squad</span></h2>
+  <p class="section-sub">Wisey Lion is here now. The rest of the squad is on the way! Sign up to be notified.</p>
+  <div class="products-grid">
+    <div class="product-card is-live">
+      <span class="pc-status pcs-live">⚡ Available!</span>
+      <div class="prod-bubble pb-purple"><img src="Characters/Wisey%20Lion%20%28transparent%29.png" alt="" style="width:110px;height:110px;object-fit:contain;"></div>
+      <h3>Wisey Lion</h3>
+      <div class="prod-role pr-purple">Brain &amp; Focus Syrup</div>
+      <p>Bacopa Monnieri, DHA, and Gotu Kola in a bubblegum syrup kids actually ask for. Clear the fog, spark the focus.</p>
+      <div class="prod-tags"><span class="ptag">Brain Health</span><span class="ptag">Focus &amp; Memory</span><span class="ptag">Bubblegum Syrup</span></div>
+      <a href="https://www.tiktok.com/shop/littleheroes_ph" target="_blank" rel="noopener noreferrer" class="btn-shop bs-purple">Buy Now</a>
+    </div>
+    <div class="product-card is-soon">
+      <span class="pc-status pcs-soon">Coming Soon</span>
+      <div class="prod-bubble pb-yellow"><img src="Characters/Munchy%20Bear%20%28transparent%29.png" alt="" style="width:110px;height:110px;object-fit:contain;"></div>
+      <h3>Munchy Bear</h3>
+      <div class="prod-role pr-yellow">Appetite Vitamins</div>
+      <p>For picky eaters! A bubblegum-flavored syrup that makes mealtimes a joy.</p>
+      <div class="prod-tags"><span class="ptag">Appetite Boost</span><span class="ptag">Picky Eaters</span><span class="ptag">Syrup Form</span></div>
+      <span class="btn-shop bs-gray">Notify Me</span>
+    </div>
+    <div class="product-card is-soon">
+      <span class="pc-status pcs-soon">Coming Soon</span>
+      <div class="prod-bubble pb-green"><img src="Characters/Giraffe%20%28transparent%29.png" alt="" style="width:110px;height:110px;object-fit:contain;"></div>
+      <h3>Giant Giraffe</h3>
+      <div class="prod-role pr-green">Height &amp; Growth Vitamins</div>
+      <p>Reach new heights! A great-tasting syrup packed with growth-supporting nutrients.</p>
+      <div class="prod-tags"><span class="ptag">Bone Health</span><span class="ptag">Height Support</span><span class="ptag">Syrup Form</span></div>
+      <span class="btn-shop bs-gray">Notify Me</span>
+    </div>
+    <div class="product-card is-soon">
+      <span class="pc-status pcs-soon">Coming Soon</span>
+      <div class="prod-bubble pb-blue"><img src="Characters/Elephant%20%28transparent%29.png" alt="" style="width:110px;height:110px;object-fit:contain;"></div>
+      <h3>Mighty Elephant</h3>
+      <div class="prod-role pr-blue">Immunity Shield Vitamins</div>
+      <p>Strong and protective. A delicious syrup that builds your child's immunity shield.</p>
+      <div class="prod-tags"><span class="ptag">Immunity Boost</span><span class="ptag">Vitamin C &amp; Zinc</span><span class="ptag">Syrup Form</span></div>
+      <span class="btn-shop bs-gray">Notify Me</span>
+    </div>
+  </div>
+</section>
+
+<section id="tiktok-feed">
+  <div style="text-align:center;max-width:640px;margin:0 auto 32px">
+    <div class="section-label">As Seen on TikTok</div>
+    <h2 class="section-title">Real <span class="c-purple">Heroes</span>, Real Stories</h2>
+    <p class="section-sub" style="margin:0 auto">See how Filipino families are using Wisey Lion. Tap any card to watch the full video on TikTok.</p>
+  </div>
+  <div class="tiktok-scroller" id="tiktokScroller">
+    <a href="https://www.tiktok.com/@vanyatantoco_/video/7595117147454639378" target="_blank" rel="noopener noreferrer" class="tiktok-card" aria-label="Watch @vanyatantoco_ on TikTok">
+      <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@vanyatantoco_/video/7595117147454639378" data-video-id="7595117147454639378"><section></section></blockquote>
+    </a>
+    <a href="https://www.tiktok.com/@janaandalonzo/video/7619371474104732935" target="_blank" rel="noopener noreferrer" class="tiktok-card" aria-label="Watch @janaandalonzo on TikTok">
+      <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@janaandalonzo/video/7619371474104732935" data-video-id="7619371474104732935"><section></section></blockquote>
+    </a>
+    <a href="https://www.tiktok.com/@preciousclaudineqt/video/7628841458082008327" target="_blank" rel="noopener noreferrer" class="tiktok-card" aria-label="Watch @preciousclaudineqt on TikTok">
+      <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@preciousclaudineqt/video/7628841458082008327" data-video-id="7628841458082008327"><section></section></blockquote>
+    </a>
+    <a href="https://www.tiktok.com/@gilliepot/video/7608111149367823637" target="_blank" rel="noopener noreferrer" class="tiktok-card" aria-label="Watch @gilliepot on TikTok">
+      <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@gilliepot/video/7608111149367823637" data-video-id="7608111149367823637"><section></section></blockquote>
+    </a>
+    <a href="https://www.tiktok.com/@sandysplayground/video/7593384177630711061" target="_blank" rel="noopener noreferrer" class="tiktok-card" aria-label="Watch @sandysplayground on TikTok">
+      <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@sandysplayground/video/7593384177630711061" data-video-id="7593384177630711061"><section></section></blockquote>
+    </a>
+    <a href="https://www.tiktok.com/@siriuslyshop/video/7622731469550587157" target="_blank" rel="noopener noreferrer" class="tiktok-card" aria-label="Watch @siriuslyshop on TikTok">
+      <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@siriuslyshop/video/7622731469550587157" data-video-id="7622731469550587157"><section></section></blockquote>
+    </a>
+    <a href="https://www.tiktok.com/@janieandbabies/video/7629541390212533525" target="_blank" rel="noopener noreferrer" class="tiktok-card" aria-label="Watch @janieandbabies on TikTok">
+      <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@janieandbabies/video/7629541390212533525" data-video-id="7629541390212533525"><section></section></blockquote>
+    </a>
+    <a href="https://www.tiktok.com/@gazepharmacist/video/7615057501163228434" target="_blank" rel="noopener noreferrer" class="tiktok-card" aria-label="Watch @gazepharmacist on TikTok">
+      <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@gazepharmacist/video/7615057501163228434" data-video-id="7615057501163228434"><section></section></blockquote>
+    </a>
+  </div>
+  <script async src="https://www.tiktok.com/embed.js"></script>
+</section>
+
+<section id="gallery" style="background:white;padding:60px 6%">
+  <div style="text-align:center;max-width:600px;margin:0 auto">
+    <div class="section-label">Follow Us</div>
+    <h2 class="section-title">Find Us on <span class="c-purple">Social Media</span></h2>
+    <p style="font-size:16px;color:var(--muted);line-height:1.75;margin-bottom:40px">
+      See Wisey Lion in action, get parenting tips, and be the first to know when the rest of the hero squad arrives!
+    </p>
+    <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap">
+      <a href="https://www.instagram.com/littleheroes_ph/" target="_blank" rel="noopener noreferrer"
+         style="display:flex;align-items:center;gap:14px;padding:20px 32px;border-radius:24px;text-decoration:none;
+                background:linear-gradient(135deg,#F58529,#DD2A7B,#8134AF,#515BD4);color:white;
+                font-weight:800;font-size:16px;transition:transform .2s;box-shadow:0 8px 24px rgba(221,42,123,.3)"
+         onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+        @littleheroes_ph
+      </a>
+      <a href="https://www.tiktok.com/@littleheroes_ph" target="_blank" rel="noopener noreferrer"
+         style="display:flex;align-items:center;gap:14px;padding:20px 32px;border-radius:24px;text-decoration:none;
+                background:#010101;color:white;font-weight:800;font-size:16px;
+                transition:transform .2s;box-shadow:0 8px 24px rgba(0,0,0,.25)"
+         onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+          <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.73a4.85 4.85 0 01-1.01-.04z"/>
+        </svg>
+        @littleheroes_ph
+      </a>
+    </div>
+    <p style="margin-top:28px;font-size:13px;color:var(--muted)">
+      DM us on Instagram or TikTok to order Wisey Lion Brain Syrup! 🦁⚡
+    </p>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="section-label">Reviews</div>
+  <h2 class="section-title">What <span class="c-purple">Hero Moms</span> Are Saying</h2>
+  <p class="section-sub">Real parents, real results. Here's what the Wisey Lion community is raving about!</p>
+  <div class="testi-grid">
+    <div class="testi-card testi-featured">
+      <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+      <p>"My son used to stare blankly during homework. I thought it was just laziness. After starting Wisey Lion, his teacher noticed a huge difference in focus. Stocks moved fast so I immediately re-ordered!"</p>
+      <div class="testi-author">
+        <div class="tav tav-yellow">👩</div>
+        <div class="tai"><strong>Mama Carla B.</strong><span>Mom of Marco (6), Quezon City</span></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+      <p>"The bubblegum flavor is the secret! My daughter asks for her 'lion drops' every morning now. And she's so much more focused in class!"</p>
+      <div class="testi-author">
+        <div class="tav tav-purple">👩</div>
+        <div class="tai"><strong>Tita Gina R.</strong><span>Mom of Sofia (7), Makati</span></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+      <p>"The 3PM sabaw moment is REAL in our house. Wisey Lion is a game changer. He now finishes homework without me nagging!"</p>
+      <div class="testi-author">
+        <div class="tav tav-green">👩</div>
+        <div class="tai"><strong>Mommy Pia L.</strong><span>Mom of Nico (8), Cebu</span></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+      <p>"Pre-ordered as soon as I saw it. Stocks ran out so fast, so secure yours early! DHA and Bacopa together is such a smart formula."</p>
+      <div class="testi-author">
+        <div class="tav tav-yellow">👨</div>
+        <div class="tai"><strong>Papa Rey A.</strong><span>Dad of Andrei (5), Davao</span></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+      <p>"Proud to support a Filipino brand! Wisey Lion is so thoughtfully made, the ingredients are legit and my kids love it. Can't wait for the full squad!"</p>
+      <div class="testi-author">
+        <div class="tav tav-purple">👩</div>
+        <div class="tai"><strong>Mama Bea T.</strong><span>Mom of Lea &amp; Nico, Pasig</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="Little%20Heroes%20logo%20%28transparent%29.png" alt="Little Heroes">
+      </div>
+      <p>Filipino vitamins made for Filipino children.<br>Big Hearts. Big Dreams. Little Heroes.</p>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/littleheroes_ph/" target="_blank" class="fsoc">📸</a>
+        <a href="https://www.tiktok.com/@littleheroes_ph" target="_blank" class="fsoc">🎵</a>
+        <a href="#" class="fsoc">📘</a>
+        <a href="#" class="fsoc">🛒</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Our Heroes</h4>
+      <ul>
+        <li><a href="#wisey">🦁 Wisey Lion (Available!)</a></li>
+        <li><a href="#products">🐻 Munchy Bear (Soon)</a></li>
+        <li><a href="#products">🦒 Giant Giraffe (Soon)</a></li>
+        <li><a href="#products">🐘 Mighty Elephant (Soon)</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#wisey">Wisey Lion</a></li>
+        <li><a href="#gallery">Follow Us</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+      <ul>
+        <li><a href="https://www.instagram.com/littleheroes_ph/" target="_blank">Instagram DM</a></li>
+        <li><a href="https://www.tiktok.com/@littleheroes_ph" target="_blank">TikTok</a></li>
+        <li><a href="#">Shopee / Lazada</a></li>
+        <li><a href="#">hello@littleheroes.ph</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Little Heroes PH · All rights reserved · Made with ❤️ in the Philippines 🇵🇭</span>
+    <div class="fchars">
+      <div class="fchar"><img src="Characters/Wisey%20Lion%20%28transparent%29.png" alt="" style="width:18px;height:18px;object-fit:contain"></div><div class="fchar"><img src="Characters/Munchy%20Bear%20%28transparent%29.png" alt="" style="width:18px;height:18px;object-fit:contain"></div><div class="fchar"><img src="Characters/Giraffe%20%28transparent%29.png" alt="" style="width:18px;height:18px;object-fit:contain"></div><div class="fchar"><img src="Characters/Elephant%20%28transparent%29.png" alt="" style="width:18px;height:18px;object-fit:contain"></div><div class="fchar">⚡</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const TIKTOK_SHOP = 'https://www.tiktok.com/shop/littleheroes_ph';
+
+// Mobile drawer toggle
+const navToggle  = document.getElementById('navToggle');
+const navDrawer  = document.getElementById('navDrawer');
+const navOverlay = document.getElementById('navOverlay');
+const navClose   = document.getElementById('navClose');
+function openDrawer(){
+  navDrawer.classList.add('open');
+  navOverlay.classList.add('open');
+  navToggle.classList.add('open');
+  navToggle.setAttribute('aria-expanded','true');
+  navDrawer.setAttribute('aria-hidden','false');
+  document.body.classList.add('drawer-open');
+}
+function closeDrawer(){
+  navDrawer.classList.remove('open');
+  navOverlay.classList.remove('open');
+  navToggle.classList.remove('open');
+  navToggle.setAttribute('aria-expanded','false');
+  navDrawer.setAttribute('aria-hidden','true');
+  document.body.classList.remove('drawer-open');
+}
+if (navToggle) navToggle.addEventListener('click', openDrawer);
+if (navOverlay) navOverlay.addEventListener('click', closeDrawer);
+if (navClose) navClose.addEventListener('click', closeDrawer);
+if (navDrawer) navDrawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+// Fix anchor links: offset by current nav height (responsive)
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const navEl = document.querySelector('nav');
+      const navH = navEl ? navEl.offsetHeight : 80;
+      const top = target.getBoundingClientRect().top + window.scrollY - (navH + 12);
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+
+// Point all pre-order buttons to TikTok Shop
+document.querySelectorAll('a').forEach(a => {
+  const text = a.textContent.trim().toLowerCase();
+  if (text.includes('pre-order') || text.includes('preorder')) {
+    a.href = TIKTOK_SHOP;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+  }
+});
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+  });
+}, { threshold: .1 });
+document.querySelectorAll('.pillar,.product-card,.testi-card,.char-card,.gm-item,.ingr-item,.wisey-ingr-pill').forEach(el => {
+  el.style.opacity='0'; el.style.transform='translateY(22px)';
+  el.style.transition='opacity .5s ease,transform .5s ease';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
